@@ -20,7 +20,7 @@ class BookController {
     }
     def show(long id) {
         def result = [valid: false]        
-        def book = Book.get(id)
+        def book = Book.read(id)
 
         result.data = book
         result.valid = true
@@ -50,7 +50,7 @@ class BookController {
 
     def delete(long id){
         def result = [valid: false]
-        def book = Book.get(id)
+        def book = Book.load(id)
         book.delete(flush: true)
         result.valid = true
         render(result as JSON)

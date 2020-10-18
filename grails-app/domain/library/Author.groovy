@@ -1,12 +1,11 @@
 package library
 
-class Book {
+class Author {
+
     String titleTH
     String titleENG
-    String author
-    double price
+    int age
 
-    static belongsTo = [category: BookCategory]
     static hasMany = [bookAuthors: BookAuthor]
 
     static constraints = {
