@@ -18,20 +18,18 @@ class BookController {
 
         render(result as JSON)
     }
-    def show() {
-        def result = [valid: false]
-        def id = params.id as long
+    def show(long id) {
+        def result = [valid: false]        
         def book = Book.get(id)
 
         result.data = book
         result.valid = true
-        
+
         render(result as JSON)
     }
 
-    def save(){
+    def save(Book book){
         def result = [valid: false]
-        def book = new Book(request.JSON)
 
         book.save(failonError: true)
         result.data = book.save()
@@ -40,12 +38,9 @@ class BookController {
         render(result as JSON)   
     }
 
-    def update(){
+    def update(Book book){
         def result = [valid: false]
-        def id = params.id as long
-        def book = Book.get(id)
 
-        bindData(book, request.JSON)
         book.save(flush: true)
         result.valid = true
         result.data = book
@@ -53,9 +48,8 @@ class BookController {
         render(result as JSON)
     }
 
-    def delete(){
+    def delete(long id){
         def result = [valid: false]
-        def id = params.id as long
         def book = Book.get(id)
         book.delete(flush: true)
         result.valid = true
